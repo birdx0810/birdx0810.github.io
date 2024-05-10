@@ -2,9 +2,9 @@ import kaboom from "kaboom";
 
 const k = kaboom({ font: "monospace" });
 
-const SPEED = 160;
+const SPEED = 120;
 
-k.loadSprite("lucas", "sprites/lucas.png", {
+k.loadSprite("lucas", "sprites/wally.png", {
   sliceX: 4,
   sliceY: 4,
   anims: {
@@ -12,17 +12,22 @@ k.loadSprite("lucas", "sprites/lucas.png", {
     idleLeft: 4,
     idleRight: 8,
     idleUp: 12,
-    moveDown: { from: 0, to: 3, speed: 5, loop: true },
-    moveLeft: { from: 4, to: 7, speed: 5, loop: true },
-    moveRight: { from: 8, to: 11, speed: 5, loop: true },
-    moveUp: { from: 12, to: 15, speed: 5, loop: true },
+    moveDown: { from: 0, to: 3, speed: 8, loop: true },
+    moveLeft: { from: 4, to: 7, speed: 8, loop: true },
+    moveRight: { from: 8, to: 11, speed: 8, loop: true },
+    moveUp: { from: 12, to: 15, speed: 8, loop: true },
   },
 });
 
 const player = k.add([k.pos(center()), k.sprite("lucas")]);
 
 k.onUpdate(() => {
-  if (isKeyDown("left")) {
+  if (
+    isKeyDown("left") &&
+    !isKeyDown("right") &&
+    !isKeyDown("up") &&
+    !isKeyDown("down")
+  ) {
     player.move(-SPEED, 0);
     if (player.curAnim() !== "moveLeft") {
       player.play("moveLeft");
@@ -32,7 +37,12 @@ k.onUpdate(() => {
     player.play("idleLeft");
   }
 
-  if (isKeyDown("right")) {
+  if (
+    isKeyDown("right") &&
+    !isKeyDown("left") &&
+    !isKeyDown("up") &&
+    !isKeyDown("down")
+  ) {
     player.move(SPEED, 0);
     if (player.curAnim() !== "moveRight") {
       player.play("moveRight");
@@ -42,7 +52,12 @@ k.onUpdate(() => {
     player.play("idleRight");
   }
 
-  if (isKeyDown("up")) {
+  if (
+    isKeyDown("up") &&
+    !isKeyDown("left") &&
+    !isKeyDown("right") &&
+    !isKeyDown("down")
+  ) {
     player.move(0, -SPEED);
     if (player.curAnim() !== "moveUp") {
       player.play("moveUp");
@@ -52,7 +67,12 @@ k.onUpdate(() => {
     player.play("idleUp");
   }
 
-  if (isKeyDown("down")) {
+  if (
+    isKeyDown("down") &&
+    !isKeyDown("left") &&
+    !isKeyDown("right") &&
+    !isKeyDown("up")
+  ) {
     player.move(0, SPEED);
     if (player.curAnim() !== "moveDown") {
       player.play("moveDown");

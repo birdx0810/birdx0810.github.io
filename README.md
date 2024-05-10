@@ -25,3 +25,7 @@ $ npm run bundle
 ```
 
 will build your game and package into a .zip file, you can upload to your server or itch.io / newground etc.
+
+## Acknowledgements
+
+- Character Sprites by [aveontrainer](https://www.deviantart.com/aveontrainer)
